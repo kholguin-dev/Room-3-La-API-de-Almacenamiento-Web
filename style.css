@@ -1,4 +1,5 @@
-/* ===== Reset y base ===== */
+
+
 * {
     font-family: 'Poppins', sans-serif;
     margin: 0;
@@ -7,120 +8,80 @@
 }
 
 body {
-    background-color: #87CEEB; /* azul cielo */
+    background-color: #87CEEB;
     padding: 2rem;
 }
 
-/* ===== Sección principal ===== */
+
 .section-contenido {
     border: 3px solid #222;
     border-radius: 20px;
     padding: 20px;
     text-align: center;
-    background-color: #fff4b8; /* amarillo suave */
+    background-color: #fff4b8;
 }
 
-/* ===== Barra de búsqueda ===== */
+
 .barra-de-busqueda {
     margin: 20px auto;
     border: 2px solid #ffd90f;
     border-radius: 20px;
     background-color: #fff;
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
     padding: 20px;
     width: fit-content;
 }
 
-/* ===== Contenedor de tarjetas ===== */
+#mensajeError {
+    color: #c0392b;
+    font-weight: bold;
+    min-height: 1.5rem;
+}
+
+
 .container-tarjetas {
     display: flex;
     flex-flow: row wrap;
-
-    /* Centrar las tarjetas */
     justify-content: center;
     align-items: center;
-
     gap: 25px;
     padding: 20px;
 }
 
-/* ===== Tarjeta Simpson ===== */
-.simpson-tarjeta {
+
+.pokemon-tarjeta {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
 
-    width: 280px;
-    min-height: 380px;
+    width: 240px;
+    min-height: 340px;
 
     border: 3px solid #ffd90f;
     border-radius: 20px;
-
     background-color: #ffffff;
 
     padding: 15px;
     gap: 10px;
 
-    overflow: hidden;
-
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* ===== Imagen ===== */
-.simpson-imagen {
-    width: 180px;
-    height: 200px;
-
-    object-fit: contain;
-}
-
-/* ===== Nombre ===== */
-.simpson-tarjeta .nombre {
-    font-size: 1.3rem;
-    font-weight: bold;
-    color: #222;
-}
-
-/* ===== Ocupación ===== */
-.simpson-tarjeta .ocupacion {
-    font-size: 1rem;
-    color: #555;
-}
-
-/* ===== Frase ===== */
-.simpson-tarjeta .frase {
-    font-size: 0.9rem;
-    font-style: italic;
-    color: #444;
-    margin-top: 5px;
-}
-
-/* ===== Hover ===== */
-.simpson-tarjeta:hover {
+.pokemon-tarjeta:hover {
     transform: translateY(-8px);
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
 }
 
-#container-tarjetas-busqueda {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: center;
-    gap: 25px;
-    padding: 20px;
+.pokemon-imagen {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
 }
 
-.simpson-tarjeta-busqueda {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 280px;
-    min-height: 380px;
-    border: 3px solid #ffd90f;
-    border-radius: 20px;
-    background-color: #ffffff;
-    padding: 15px;
-    gap: 10px;
+.pokemon-tarjeta .nombre {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #222;
+    text-transform: capitalize;
 }

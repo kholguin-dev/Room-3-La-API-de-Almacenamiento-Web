@@ -1,66 +1,69 @@
-<<!DOCTYPE html>
+<!---TAREA 1 ESTRUCTUA HTLM-->
+<!DOCTYPE html>
 <html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Pokédex con Favoritos</title>
+    <title>Pokémon</title>
 </head>
 
 <body>
-
-    <header>
-        <h1>Pokédex</h1>
-    </header>
-
     <main>
         <section class="section-contenido">
+            <h2>
+                Consumiendo API de Pokémon con favoritos
+            </h2>
 
-            <h2>Busca tu Pokémon y guárdalo en favoritos</h2>
 
             <div class="barra-de-busqueda">
-
                 <label for="inputPokemon">
                     Buscar Pokémon
                 </label>
 
-                <input
-                    type="text"
-                    id="inputPokemon"
-                    name="busqueda-pokemon"
-                    placeholder="Ej: pikachu"
-                >
-
+                <input 
+                    type="text" 
+                    id="inputPokemon" 
+                    name="busqueda-pokemon">
+                <!---boton buscar-->
                 <button type="button" id="btnBuscar">
                     Buscar
                 </button>
 
+                <!---boton limpiar-->
                 <button type="button" id="btnLimpiar">
                     Limpiar
                 </button>
-
             </div>
 
-            <!-- Resultado de la búsqueda y aquí también debe muestrar el error -->
-            <div id="resultadoBusqueda">
+            <!----->
+            <p id="mensajeError"></p>
+
+            <!-- Resultado de búsqueda -->
+            <div id="resultadoBusqueda" class="container-tarjetas">
             </div>
 
-            <!-- Favoritos guardados en localStorage -->
-            <h2>Mis favoritos</h2>
+            <!-- Favoritos -->
+            <h3>Favoritos</h3>
             <div id="listaFavoritos" class="container-tarjetas">
             </div>
 
+
+            <h3>Todos los Pokémon</h3>
+            <div id="listaPokemones" class="container-tarjetas">
+            </div>
         </section>
     </main>
 
     <footer>
         <p>
-            Derechos reservados &copy; Juliana Bernal - Stefania Redondo - Kevin Holguin - Diana Ocampo - Daniel Getial - Carolayn Mora 2026
+        Derechos reservados &copy; Juliana Bernal - Stefania Redondo - Kevin
+        Holguin - Diana Ocampo - Daniel Getial - Carolayn Mora 2026
         </p>
     </footer>
 
-    <script type="module" src="main.js"></script>
+    <script type="module" src="dom.js"></script>
 
 </body>
 

@@ -1,77 +1,54 @@
-import { buscarPersonaje } from './script.js';
-import { configurarEventos } from './events.js';
 
-const containerTarjeta = document.querySelector('.container-tarjetas');
-const containerResultadosBusqueda = document.getElementById('container-tarjetas-busqueda');
+import { obtenerPokemon, obtenerListaPokemon } from './script.js';
 
-const inputBusqueda = document.getElementById('nombre-personaje');
-const botonBuscar = document.getElementById('boton-buscar');
+const input = document.getElementById('inputPokemon');
+const btnBuscar = document.getElementById('btnBuscar');
+const btnLimpiar = document.getElementById('btnLimpiar');
 
-function crearHTMLTarjeta(personaje) {
-    const frase = personaje.phrases && personaje.phrases.length !== 0
-        ? personaje.phrases[0]
-        : 'Sin frases!';
+const resultado = document.getElementById('resultadoBusqueda');
+const lista = document.getElementById('listaPokemones');
+const mensaje = document.getElementById('mensajeError');
 
+// Crear una tarjeta
+function crearTarjeta(pokemon) {
     return `
-        <div class="simpson-tarjeta">
-            <img 
-                src="https://cdn.thesimpsonsapi.com/200${personaje.portrait_path}" 
-                alt="Imagen de ${personaje.name}" 
-                class="simpson-imagen">
-
-            <p class="nombre">${personaje.name}</p>
-            <p class="ocupacion">${personaje.occupation || 'Sin ocupación'}</p>
-            <p class="frase">${frase}</p>
+        <div class="pokemon-tarjeta">
+            <img src="${pokemon.imagen}" alt="${pokemon.nombre}">
+            <h3>${pokemon.nombre.toUpperCase()}</h3>
+            <p>Ataque: ${pokemon.ataque}</p>
+            <p>Defensa: ${pokemon.defensa}</p>
         </div>
     `;
 }
 
-export function renderizarTodosLosPersonajes(listaPersonajes) {
-    for (let personaje of listaPersonajes) {
-        const tarjeta = document.createElement('div');
+// Mostrar los 20 primeros al cargar la pagina
+async function iniciar() {
+    const pokemones = await obtenerListaPokemon();
 
-        tarjeta.innerHTML = crearHTMLTarjeta(personaje);
-
-        containerTarjeta.append(tarjeta);
+    for (const pokemon of pokemones) {
+        lista.innerHTML = lista.innerHTML + crearTarjeta(pokemon);
     }
 }
 
-export function renderizarPersonajes(listaPersonajes) {
-    for (let personaje of listaPersonajes) {
-        const tarjeta = document.createElement('div');
+// Buscar un Pokémon por nombre
+btnBuscar.addEventListener('click', async () => {
+    const nombre = input.value.toLowerCase(); // para q busque sin improtat MAYUS
 
-        tarjeta.innerHTML = crearHTMLTarjeta(personaje).replace(
-            'simpson-tarjeta',
-            'simpson-tarjeta-busqueda'
-        );
-
-        containerResultadosBusqueda.append(tarjeta);
+    resultado.innerHTML = '';
+    mensaje.textContent = '';
+    const pokemon = await obtenerPokemon(nombre);
+    if (pokemon === null) {
+        mensaje.textContent = 'Pokémon no encontrado';
+        return;
     }
-}
+    resultado.innerHTML = crearTarjeta(pokemon);
+});
 
-export function limpiarResultadosBusqueda() {
-    const listaTarjetasDeBusqueda = document.querySelectorAll(
-        '.simpson-tarjeta-busqueda'
-    );
+// Limpiar la búsqueda
+btnLimpiar.addEventListener('click', () => {
+    input.value = '';
+    resultado.innerHTML = '';
+    mensaje.textContent = '';
+});
 
-    listaTarjetasDeBusqueda.forEach(tarjeta => {
-        tarjeta.remove();
-    });
-}
-
-
-// Get all characters
-const data = await buscarPersonaje();
-
-const listaPersonajes = data.results;
-
-// Show all characters
-renderizarTodosLosPersonajes(listaPersonajes);
-
-configurarEventos(
-    botonBuscar,
-    inputBusqueda,
-    listaPersonajes,
-    limpiarResultadosBusqueda,
-    renderizarPersonajes
-);
+iniciar();

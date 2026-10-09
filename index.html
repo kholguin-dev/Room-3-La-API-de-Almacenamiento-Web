@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Manejo DOM</title>
+</head>
+
+<body>
+
+    <main>
+        <section class="section-contenido">
+
+            <h2>
+                Este es el contenido principal de la API de los Simpsons.
+            </h2>
+
+            <div class="barra-de-busqueda">
+
+                <label for="nombre-personaje">
+                    Buscar personaje
+                </label>
+
+                <input 
+                    type="text" 
+                    id="nombre-personaje" 
+                    name="busqueda-personaje"
+                >
+
+                <button type="button" id="boton-buscar">
+                    Buscar
+                </button>
+
+                <button type="button" id="boton-borrar-resultados">
+                    Limpiar resultados
+                </button>
+
+            </div>
+
+            <!-- Todas las tarjetas -->
+            <div class="container-tarjetas">
+            </div>
+
+            <!-- Resultados de búsqueda -->
+            <div id="container-tarjetas-busqueda">
+            </div>
+
+        </section>
+    </main>
+
+    <footer>
+        <p>
+            Derechos reservados &copy; Juliana Bernal 2026
+        </p>
+    </footer>
+
+    <script type="module" src="dom.js"></script>
+
+</body>
+
+</html>

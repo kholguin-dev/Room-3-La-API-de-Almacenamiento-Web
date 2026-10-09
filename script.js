@@ -20,6 +20,7 @@ export async function buscarPokemon() {
   }
 }
 
+// Funcion para buscar un unico personaje por su nombre
 export async function buscarPorNombre(nombre) {
   try {
     // encodeURIComponent limpia espacios o caracteres especiales en la URL

@@ -1,3 +1,6 @@
+import { buscarPokemon } from "./script.js";
+import { configurarEventos } from "./events.js";
+
 export function crearTarjetaPokemon(pokemon) {
     const tarjeta = document.createElement('div');
     tarjeta.classList.add('pokemon-tarjeta');

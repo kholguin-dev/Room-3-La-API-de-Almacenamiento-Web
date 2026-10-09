@@ -1,79 +1,35 @@
-import { buscarPokemon } from "./script.js";
-import { configurarEventos } from "./events.js";
+export function crearTarjetaPokemon(pokemon) {
+    const tarjeta = document.createElement('div');
+    tarjeta.classList.add('pokemon-tarjeta');
+    const imagen = document.createElement('img');
+    const urlImagen = pokemon.sprites?.front_default || 'https://placeholder.com';
+    imagen.setAttribute('src', urlImagen);
+    imagen.setAttribute('alt', `Imagen de ${pokemon.name}`);
+    imagen.classList.add('pokemon-imagen');
 
-const containerTarjeta = document.querySelector(".container-tarjetas");
-const containerResultadosBusqueda = document.getElementById(
-  "container-tarjetas-busqueda",
-);
+    const nombre = document.createElement('p');
+    nombre.classList.add('nombre');
+    nombre.textContent = pokemon.name.toUpperCase(); 
 
-const inputBusqueda = document.getElementById("nombre-personaje");
-const botonBuscar = document.getElementById("boton-buscar");
+    const statAtaque = pokemon.stats.find(s => s.stat.name === 'attack')?.base_stat || 0;
+    const statDefensa = pokemon.stats.find(s => s.stat.name === 'defense')?.base_stat || 0;
 
-function crearHTMLTarjeta(personaje) {
-  const frase =
-    personaje.phrases && personaje.phrases.length !== 0
-      ? personaje.phrases[0]
-      : "Sin frases!";
+    const ataque = document.createElement('p');
+    ataque.classList.add('ataque');
+    ataque.textContent = `Ataque: ${statAtaque}`;
 
-  return `
-        <div class="simpson-tarjeta">
-            <img 
-                src="https://cdn.thesimpsonsapi.com/200${personaje.portrait_path}" 
-                alt="Imagen de ${personaje.name}" 
-                class="simpson-imagen">
+    const defensa = document.createElement('p');
+    defensa.classList.add('defensa');
+    defensa.textContent = `Defensa: ${statDefensa}`;
 
-            <p class="nombre">${personaje.name}</p>
-            <p class="ocupacion">${personaje.occupation || "Sin ocupación"}</p>
-            <p class="frase">${frase}</p>
-        </div>
-    `;
+    const botonFavorito = document.createElement('button');
+    botonFavorito.classList.add('btn-favorito');
+    botonFavorito.textContent = 'Agregar a favoritos';
+    botonFavorito.dataset.pokemon = JSON.stringify(pokemon); 
+
+    const botonEliminar = document.createElement('button');
+    botonEliminar.classList.add('btn-eliminar');
+    botonEliminar.textContent = 'Eliminar';
+    tarjeta.append(imagen, nombre, ataque, defensa, botonFavorito, botonEliminar);
+    return tarjeta;
 }
-
-export function renderizarTodosLosPersonajes(listaPersonajes) {
-  for (let personaje of listaPersonajes) {
-    const tarjeta = document.createElement("div");
-
-    tarjeta.innerHTML = crearHTMLTarjeta(personaje);
-
-    containerTarjeta.append(tarjeta);
-  }
-}
-
-export function renderizarPersonajes(listaPersonajes) {
-  for (let personaje of listaPersonajes) {
-    const tarjeta = document.createElement("div");
-
-    tarjeta.innerHTML = crearHTMLTarjeta(personaje).replace(
-      "simpson-tarjeta",
-      "simpson-tarjeta-busqueda",
-    );
-
-    containerResultadosBusqueda.append(tarjeta);
-  }
-}
-
-export function limpiarResultadosBusqueda() {
-  const listaTarjetasDeBusqueda = document.querySelectorAll(
-    ".simpson-tarjeta-busqueda",
-  );
-
-  listaTarjetasDeBusqueda.forEach((tarjeta) => {
-    tarjeta.remove();
-  });
-}
-
-// Get all characters
-const data = await buscarPokemon();
-
-const listaPersonajes = data.results;
-
-// Show all characters
-renderizarTodosLosPersonajes(listaPersonajes);
-
-configurarEventos(
-  botonBuscar,
-  inputBusqueda,
-  listaPersonajes,
-  limpiarResultadosBusqueda,
-  renderizarPersonajes,
-);

@@ -3,7 +3,12 @@ export function configurarEventos(
     inputBusqueda,
     listaPersonajes,
     limpiarResultadosBusqueda,
-    renderizarPersonajes
+    renderizarPersonajes,
+    botonlimpiar, //kevin
+    contenedorresultados,
+    contenedorfavoritos,
+    guardarenfavoritos,
+    eliminardefavoritos
 ) {
 
     botonBuscar.addEventListener('click', () => {
@@ -21,7 +26,37 @@ export function configurarEventos(
         console.log("4. Encontrados:", personajesEncontrados);
 
         limpiarResultadosBusqueda();
+        });
 
         renderizarPersonajes(personajesEncontrados);
+        if (botonlimpiar) {
+            botonlimpiar.addEventListener('click', () => {
+                inputBusqueda.value = '';
+                limpiarResultadosBusqueda();
+            });
+        }
+        if (contenedorresultados) {
+            contenedorresultados.addEventListener('click', (event) => {
+                const elementoClickeado = event.target;
+                
+                
+        if (elementoClickeado.classList.contains('btn-favorito')) {
+            if (guardarenfavoritos) {
+                guardarenfavoritos(elementoClickeado.dataset.id);
+            }
+        }
     });
-}   
+  }
+
+  if (contenedorfavoritos) {
+    contenedorfavoritos.addEventListener('click', (event) => {
+      const elementoClickeado = event.target;
+
+      if (elementoClickeado.classList.contains('btn-eliminar')) {
+        if (eliminardefavoritos) {
+          eliminardefavoritos(elementoClickeado.dataset.id);
+        }
+      }
+    });
+  }
+}

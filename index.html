@@ -1,41 +1,52 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
-    <title>Manejo DOM</title>
+    <title>Pokédex con Favoritos</title>
   </head>
 
   <body>
+    <header>
+      <h1>Pokédex</h1>
+    </header>
+
     <main>
       <section class="section-contenido">
-        <h2>Este es el contenido principal de la API de los Simpsons.</h2>
+        <h2>Busca tu Pokémon y guárdalo en favoritos</h2>
 
         <div class="barra-de-busqueda">
-          <label for="nombre-personaje"> Buscar personaje </label>
+          <label for="inputPokemon"> Buscar Pokémon </label>
 
-          <input type="text" id="nombre-personaje" name="busqueda-personaje" />
+          <input
+            type="text"
+            id="inputPokemon"
+            name="busqueda-pokemon"
+            placeholder="Ej: pikachu"
+          />
 
-          <button type="button" id="boton-buscar">Buscar</button>
+          <button type="button" id="btnBuscar">Buscar</button>
 
-          <button type="button" id="boton-borrar-resultados">
-            Limpiar resultados
-          </button>
+          <button type="button" id="btnLimpiar">Limpiar</button>
         </div>
 
-        <!-- Todas las tarjetas -->
-        <div class="container-tarjetas"></div>
+        <!-- Resultado de la búsqueda y aquí también debe muestrar el error -->
+        <div id="resultadoBusqueda"></div>
 
-        <!-- Resultados de búsqueda -->
-        <div id="container-tarjetas-busqueda"></div>
+        <!-- Favoritos guardados en localStorage -->
+        <h2>Mis favoritos</h2>
+        <div id="listaFavoritos" class="container-tarjetas"></div>
       </section>
     </main>
 
     <footer>
-      <p>Derechos reservados &copy; Juliana Bernal 2026</p>
+      <p>
+        Derechos reservados &copy; Juliana Bernal - Stefania Redondo - Kevin
+        Holguin - Diana Ocampo - Daniel Getial - Carolayn Mora 2026
+      </p>
     </footer>
 
-    <script type="module" src="dom.js"></script>
+    <script type="module" src="main.js"></script>
   </body>
 </html>
